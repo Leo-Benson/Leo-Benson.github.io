@@ -17,9 +17,9 @@ about:
 ---
 
 ::: {#hero-heading}
-## Leo Benson
+## Introduction
 
-Junior @ St. Olaf College studying Biology and Statistics & Data Science
+Hi! My name is Leo Benson and I am a Junior at St. Olaf College studying Biology and Statistics & Data Science. I'm from St. Paul Minnesota and I am a Minnesota lover! I'm a big sports fan and I love getting outside whenever I can. Here on campus, I work in the natural lands and as an academic tutor, and I'm on the ultimate frisbee team.
 
 ## Education
 
