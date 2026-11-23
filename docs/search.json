@@ -2,9 +2,30 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Leo-Benson.github.io",
+    "title": "Leo Benson",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Junior @ St. Olaf College studying Biology and Statistics & Data Science\n\n\n\nSt. Olaf College | Northfield, MN\nBA Biology & Statistics\nSt. Paul Academy and Summit School | St. Paul, MN\nHigh School Diploma\n\n\n\n\nData Science\nData Analytics\nBiostatistics"
+  },
+  {
+    "objectID": "index.html#leo-benson",
+    "href": "index.html#leo-benson",
+    "title": "Leo Benson",
+    "section": "",
+    "text": "Junior @ St. Olaf College studying Biology and Statistics & Data Science"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Leo Benson",
+    "section": "",
+    "text": "St. Olaf College | Northfield, MN\nBA Biology & Statistics\nSt. Paul Academy and Summit School | St. Paul, MN\nHigh School Diploma"
+  },
+  {
+    "objectID": "index.html#career-interests",
+    "href": "index.html#career-interests",
+    "title": "Leo Benson",
+    "section": "",
+    "text": "Data Science\nData Analytics\nBiostatistics"
   },
   {
     "objectID": "about.html",
@@ -12,5 +33,68 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "quarto_MP.html",
+    "href": "quarto_MP.html",
+    "title": "Mini Project #1",
+    "section": "",
+    "text": "Stories in the news have an extreme range of topics. From hopeful accounts of success to the complexity of current global events, media intake of the news is constant through social media and news companies. Headlines capture the attention of consumers and categorize the news story, but what exactly do these one sentence advertisers have to say? The Kaggle dataset “A Million News Headlines” contains headlines from the Australian Broadcasting Corporation (ABC) from 2003 to 2021. ABC is a reputable Australian news source that captures stories from across the world, and the dataset can be used to perform text analysis of headlines over time.\nI decided to focus on the topics and sentiment of ABC news over time to get a comprehensive understanding of news topics from a global perspective. I approached the analysis with the following questions in mind:\n\nWhat topics are most common in ABC news headlines?\nHow has the sentiment of ABC news headlines changed over time?"
+  },
+  {
+    "objectID": "quarto_MP.html#sources-alt-text-for-graph-headline-sentiments-by-year-over-time",
+    "href": "quarto_MP.html#sources-alt-text-for-graph-headline-sentiments-by-year-over-time",
+    "title": "Mini Project #1",
+    "section": "Sources + Alt Text For Graph “Headline Sentiments by Year Over Time”",
+    "text": "Sources + Alt Text For Graph “Headline Sentiments by Year Over Time”\nData Source: https://www.kaggle.com/datasets/therohk/million-headlines\nAlt Text:\nThis is a scatter plot with a smoother showing ABC headline sentiments over time. Publish year is on the x axis and ranges from 2003 to 2021. Sentiment, the difference in number of positive and negatively labelled words, is on the y axis and ranges from -20,000 to 0. The scatter plot shows that over time sentiment has fluctuated but overall increased while remaining negative. From 2003 to 2009 there is a a decrease in sentiment then from 2009 on there is a positive linear relationship between sentiment and publish year. At the top of the graph, there is a horizontal red line indicating where the sentiment is zero and the points never exceed it.\nLink to Code"
+  },
+  {
+    "objectID": "quarto_MP.knit.html",
+    "href": "quarto_MP.knit.html",
+    "title": "Mini Project #1",
+    "section": "",
+    "text": "Stories in the news have an extreme range of topics. From hopeful accounts of success to the complexity of current global events, media intake of the news is constant through social media and news companies. Headlines capture the attention of consumers and categorize the news story, but what exactly do these one sentence advertisers have to say? The Kaggle dataset “A Million News Headlines” contains headlines from the Australian Broadcasting Corporation (ABC) from 2003 to 2021. ABC is a reputable Australian news source that captures stories from across the world, and the dataset can be used to perform text analysis of headlines over time.\nI decided to focus on the topics and sentiment of ABC news over time to get a comprehensive understanding of news topics from a global perspective. I approached the analysis with the following questions in mind:\n\nWhat topics are most common in ABC news headlines?\nHow has the sentiment of ABC news headlines changed over time?"
+  },
+  {
+    "objectID": "quarto_MP.knit.html#sources-alt-text-for-graph-headline-sentiments-by-year-over-time",
+    "href": "quarto_MP.knit.html#sources-alt-text-for-graph-headline-sentiments-by-year-over-time",
+    "title": "Mini Project #1",
+    "section": "Sources + Alt Text For Graph “Headline Sentiments by Year Over Time”",
+    "text": "Sources + Alt Text For Graph “Headline Sentiments by Year Over Time”\nData Source: https://www.kaggle.com/datasets/therohk/million-headlines\nAlt Text:\nThis is a scatter plot with a smoother showing ABC headline sentiments over time. Publish year is on the x axis and ranges from 2003 to 2021. Sentiment, the difference in number of positive and negatively labelled words, is on the y axis and ranges from -20,000 to 0. The scatter plot shows that over time sentiment has fluctuated but overall increased while remaining negative. From 2003 to 2009 there is a a decrease in sentiment then from 2009 on there is a positive linear relationship between sentiment and publish year. At the top of the graph, there is a horizontal red line indicating where the sentiment is zero and the points never exceed it.\nLink to Code"
+  },
+  {
+    "objectID": "custom_maps.html",
+    "href": "custom_maps.html",
+    "title": "Interactive and Static United States Maps",
+    "section": "",
+    "text": "Download Necessary Packages\nlibrary(tidyverse)\nlibrary(mdsr) \nlibrary(maps)\nlibrary(lubridate)\nlibrary(leaflet)\nlibrary(sf)\nlibrary(poliscidata)\nlibrary(htmltools)\nlibrary(glue)\nlibrary(viridis)\n\n\n\n\nImport Data and Select Variables of Interest\n#obtain state geometry from sf package\n\nstates_sf &lt;- \n  read_sf(\"https://rstudio.github.io/leaflet/json/us-states.geojson\") |&gt;\n  select(name, geometry)\n\n\n#obtain state level data for variables of interest using poliscidata package\n\npolisci_data &lt;- as_tibble(poliscidata::states) |&gt;\n  select(state, alcohol, carfatal07)\n\n\n\n\nClean and Join Data\n#reformat state names in both datasets to remove spaces and make lowercase\n\nstates_sf &lt;- states_sf |&gt;\n  mutate(name = str_squish(name),\n         name = str_to_lower(name),\n         name = str_remove(name, \" \")\n         )\n\npolisci_data &lt;- polisci_data |&gt;\n  mutate(state = str_squish(state),\n         state = str_to_lower(state),\n         state = str_remove(state, \" \")\n         )\n\nstate_data &lt;- states_sf |&gt;\n  left_join(polisci_data, by = c(\"name\" = \"state\")) |&gt;\n  filter(!name %in% c(\"district of columbia\", \"puertorico\", \"alaska\", \"hawaii\"))"
+  },
+  {
+    "objectID": "custom_maps.html#data-aquisition-and-cleaning",
+    "href": "custom_maps.html#data-aquisition-and-cleaning",
+    "title": "Interactive and Static United States Maps",
+    "section": "",
+    "text": "Download Necessary Packages\nlibrary(tidyverse)\nlibrary(mdsr) \nlibrary(maps)\nlibrary(lubridate)\nlibrary(leaflet)\nlibrary(sf)\nlibrary(poliscidata)\nlibrary(htmltools)\nlibrary(glue)\nlibrary(viridis)\n\n\n\n\nImport Data and Select Variables of Interest\n#obtain state geometry from sf package\n\nstates_sf &lt;- \n  read_sf(\"https://rstudio.github.io/leaflet/json/us-states.geojson\") |&gt;\n  select(name, geometry)\n\n\n#obtain state level data for variables of interest using poliscidata package\n\npolisci_data &lt;- as_tibble(poliscidata::states) |&gt;\n  select(state, alcohol, carfatal07)\n\n\n\n\nClean and Join Data\n#reformat state names in both datasets to remove spaces and make lowercase\n\nstates_sf &lt;- states_sf |&gt;\n  mutate(name = str_squish(name),\n         name = str_to_lower(name),\n         name = str_remove(name, \" \")\n         )\n\npolisci_data &lt;- polisci_data |&gt;\n  mutate(state = str_squish(state),\n         state = str_to_lower(state),\n         state = str_remove(state, \" \")\n         )\n\nstate_data &lt;- states_sf |&gt;\n  left_join(polisci_data, by = c(\"name\" = \"state\")) |&gt;\n  filter(!name %in% c(\"district of columbia\", \"puertorico\", \"alaska\", \"hawaii\"))"
+  },
+  {
+    "objectID": "custom_maps.html#car-fatality-data",
+    "href": "custom_maps.html#car-fatality-data",
+    "title": "Interactive and Static United States Maps",
+    "section": "2007 Car Fatality Data",
+    "text": "2007 Car Fatality Data\n\n\nStatic Map Code\nggplot(data = state_data) + \n  geom_sf(\n    aes(fill = carfatal07), \n    colour = \"white\", \n    linetype = 2\n  ) + \n  theme_void() + \n  scale_fill_viridis() +\n  labs(title = \"2007 United States Motor Vehicle Fatality\", \n       fill = \"Fatalities per 100,000\",\n       caption = \"Data from poliscidata R package\"\n)\n\n\n\n\n\n\n\n\n\n\n\nInteractive Map Code\n#create interactive labels\n\nstate_data &lt;- state_data |&gt;\n  mutate(labels = str_c(name, \": \", carfatal07, \" Fatalities per 100,000\"))\n\n#assign a color pallet based on numeric variable\n\npal &lt;- colorNumeric(\"viridis\", domain = state_data$carfatal07)\nlabels &lt;- lapply(state_data$labels, HTML)\n\nleaflet(state_data) |&gt;\n  setView(-96, 37.8, 4) |&gt;\n  addTiles() |&gt;\n  addControl(    #add title\n  html = \"&lt;h3&gt;2007 United States Motor Vehicle Fatality&lt;/h3&gt;\",\n  position = \"topright\"\n) |&gt;\n  addControl(    #add caption\n  html = \"Data from poliscidata R package\",\n  position = \"bottomleft\"\n) |&gt;\n  addPolygons(\n    fillColor = ~pal(carfatal07),\n    weight = 2,\n    opacity = 1,\n    color = \"white\",\n    dashArray = \"3\",\n    fillOpacity = 0.7,\n    highlightOptions = highlightOptions(\n      weight = 5,\n      color = \"#666\",\n      dashArray = \"\",\n      fillOpacity = 0.7,\n      bringToFront = TRUE),\n    label = labels,\n    labelOptions = labelOptions(\n      style = list(\"font-weight\" = \"normal\", padding = \"3px 8px\"),\n      textsize = \"15px\",\n      direction = \"auto\")) |&gt;\n  addLegend(pal = pal,  ,  #create legend that does not include NA category\n            values = state_data$carfatal07[!is.na(state_data$carfatal07)],               opacity = 0.7, \n            title = \"Fatalities per 100,000\",\n            position = \"bottomright\")\n\n\n\n\n\n\nThe map illustrates that Mississippi and Montana had the greatest number of motor vehicle fatalities per 100,000 population in 2007. Generally, both the West and East Coast had less fatalities and the Southeast United States had more fatalities. I was curious what factors could lead to differences in motor vehicle fatality, which inspired me to examine United States alcohol consumption in 2007."
+  },
+  {
+    "objectID": "custom_maps.html#alcohol-consumption-data",
+    "href": "custom_maps.html#alcohol-consumption-data",
+    "title": "Interactive and Static United States Maps",
+    "section": "2007 Alcohol Consumption Data",
+    "text": "2007 Alcohol Consumption Data\n\n\nStatic Map Code\nggplot(data = state_data) + \n  geom_sf(\n    aes(fill = alcohol), \n    colour = \"white\", \n    linetype = 2\n  ) + \n  theme_void() + \n  scale_fill_viridis(option = \"A\") +\n  labs(title = \"2007 United States Alcohol Consumption\", \n       fill = \"Gallons per Capita\",\n       caption = \"Data from poliscidata R package\"\n)\n\n\n\n\n\n\n\n\n\n\n\nInteractive Map Code\n#create interactive labels\n\nstate_data &lt;- state_data |&gt;\n  mutate(labels = str_c(name, \": \", alcohol, \" Gallons Consumed per Capita\"))\n\n\n#assign a color pallet based on numeric variable\n\n\npal &lt;- colorNumeric(\"magma\", domain = state_data$alcohol)\nlabels &lt;- lapply(state_data$labels, HTML)\n\nleaflet(state_data) |&gt;\n  setView(-96, 37.8, 4) |&gt;\n  addTiles() |&gt;\n  addControl(   #add title\n  html = \"&lt;h3&gt;2007 United States Alcohol Consumption&lt;/h3&gt;\",\n  position = \"topright\"\n) |&gt;\n  addControl(   #add caption\n  html = \"Data from poliscidata R package\",\n  position = \"bottomleft\"\n) |&gt;\n  addPolygons(\n    fillColor = ~pal(alcohol),\n    weight = 2,\n    opacity = 1,\n    color = \"white\",\n    dashArray = \"3\",\n    fillOpacity = 0.7,\n    highlightOptions = highlightOptions(\n      weight = 5,\n      color = \"#666\",\n      dashArray = \"\",\n      fillOpacity = 0.7,\n      bringToFront = TRUE),\n    label = labels,\n    labelOptions = labelOptions(\n      style = list(\"font-weight\" = \"normal\", padding = \"3px 8px\"),\n      textsize = \"15px\",\n      direction = \"auto\")) |&gt;\n  addLegend(pal = pal,   #create legend that does not include NA category\n            values = state_data$alcohol[!is.na(state_data$alcohol)], \n            opacity = 0.7, \n            title = \"Gallons per Capita\",\n            position = \"bottomright\")\n\n\n\n\n\n\nThe map did not illustrate the same trend as the motor vehicle fatality data. In fact, the Southeastern United States generally consumed slightly less alcohol per capita than Midwest and West Coast states, with exception to Utah which had the lowest amount of consumption. New Hampshire, Nevada, Wisconsin, and North Dakota had the greatest alcohol consumption in 2007."
+  },
+  {
+    "objectID": "quarto_MP.html#sources-and-links",
+    "href": "quarto_MP.html#sources-and-links",
+    "title": "Mini Project #1",
+    "section": "Sources and Links",
+    "text": "Sources and Links\nData Source\nLink to Code"
   }
 ]
