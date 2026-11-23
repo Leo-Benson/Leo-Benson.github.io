@@ -1,0 +1,226 @@
+---
+title: "Interactive and Static United States Maps"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+## Data Aquisition and Cleaning
+
+```{r, message = FALSE, error = FALSE, warning = FALSE}
+#| code-fold: true
+#| code-summary: "Download Necessary Packages"
+
+library(tidyverse)
+library(mdsr) 
+library(maps)
+library(lubridate)
+library(leaflet)
+library(sf)
+library(poliscidata)
+library(htmltools)
+library(glue)
+library(viridis)
+
+```
+
+```{r, message = FALSE, error = FALSE, warning = FALSE}
+#| code-fold: true
+#| code-summary: "Import Data and Select Variables of Interest"
+
+#obtain state geometry from sf package
+
+states_sf <- 
+  read_sf("https://rstudio.github.io/leaflet/json/us-states.geojson") |>
+  select(name, geometry)
+
+
+#obtain state level data for variables of interest using poliscidata package
+
+polisci_data <- as_tibble(poliscidata::states) |>
+  select(state, alcohol, carfatal07)
+
+
+```
+
+```{r, message = FALSE, error = FALSE, warning = FALSE}
+#| code-fold: true
+#| code-summary: "Clean and Join Data"
+
+
+#reformat state names in both datasets to remove spaces and make lowercase
+
+states_sf <- states_sf |>
+  mutate(name = str_squish(name),
+         name = str_to_lower(name),
+         name = str_remove(name, " ")
+         )
+
+polisci_data <- polisci_data |>
+  mutate(state = str_squish(state),
+         state = str_to_lower(state),
+         state = str_remove(state, " ")
+         )
+
+state_data <- states_sf |>
+  left_join(polisci_data, by = c("name" = "state")) |>
+  filter(!name %in% c("district of columbia", "puertorico", "alaska", "hawaii"))
+
+```
+
+## 2007 Car Fatality Data
+
+```{r, message = FALSE, error = FALSE, warning = FALSE}
+#| code-fold: true
+#| code-summary: "Static Map Code"
+
+ggplot(data = state_data) + 
+  geom_sf(
+    aes(fill = carfatal07), 
+    colour = "white", 
+    linetype = 2
+  ) + 
+  theme_void() + 
+  scale_fill_viridis() +
+  labs(title = "2007 United States Motor Vehicle Fatality", 
+       fill = "Fatalities per 100,000",
+       caption = "Data from poliscidata R package"
+)
+  
+
+
+```
+
+```{r, message = FALSE, error = FALSE, warning = FALSE}
+#| code-fold: true
+#| code-summary: "Interactive Map Code"
+
+
+#create interactive labels
+
+state_data <- state_data |>
+  mutate(labels = str_c(name, ": ", carfatal07, " Fatalities per 100,000"))
+
+#assign a color pallet based on numeric variable
+
+pal <- colorNumeric("viridis", domain = state_data$carfatal07)
+labels <- lapply(state_data$labels, HTML)
+
+leaflet(state_data) |>
+  setView(-96, 37.8, 4) |>
+  addTiles() |>
+  addControl(    #add title
+  html = "<h3>2007 United States Motor Vehicle Fatality</h3>",
+  position = "topright"
+) |>
+  addControl(    #add caption
+  html = "Data from poliscidata R package",
+  position = "bottomleft"
+) |>
+  addPolygons(
+    fillColor = ~pal(carfatal07),
+    weight = 2,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.7,
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    label = labels,
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto")) |>
+  addLegend(pal = pal,  ,  #create legend that does not include NA category
+            values = state_data$carfatal07[!is.na(state_data$carfatal07)],               opacity = 0.7, 
+            title = "Fatalities per 100,000",
+            position = "bottomright")
+
+```
+
+The map illustrates that Mississippi and Montana had the greatest number of motor vehicle fatalities per 100,000 population in 2007. Generally, both the West and East Coast had less fatalities and the Southeast United States had more fatalities. I was curious what factors could lead to differences in motor vehicle fatality, which inspired me to examine United States alcohol consumption in 2007.
+
+## 2007 Alcohol Consumption Data
+
+```{r}
+#| message: false
+#| error: false
+#| warning: false
+#| code-fold: true
+#| code-summary: "Static Map Code"
+
+ggplot(data = state_data) + 
+  geom_sf(
+    aes(fill = alcohol), 
+    colour = "white", 
+    linetype = 2
+  ) + 
+  theme_void() + 
+  scale_fill_viridis(option = "A") +
+  labs(title = "2007 United States Alcohol Consumption", 
+       fill = "Gallons per Capita",
+       caption = "Data from poliscidata R package"
+)
+
+
+```
+
+```{r, message = FALSE, error = FALSE, warning = FALSE}
+#| code-fold: true
+#| code-summary: "Interactive Map Code"
+
+
+#create interactive labels
+
+state_data <- state_data |>
+  mutate(labels = str_c(name, ": ", alcohol, " Gallons Consumed per Capita"))
+
+
+#assign a color pallet based on numeric variable
+
+
+pal <- colorNumeric("magma", domain = state_data$alcohol)
+labels <- lapply(state_data$labels, HTML)
+
+leaflet(state_data) |>
+  setView(-96, 37.8, 4) |>
+  addTiles() |>
+  addControl(   #add title
+  html = "<h3>2007 United States Alcohol Consumption</h3>",
+  position = "topright"
+) |>
+  addControl(   #add caption
+  html = "Data from poliscidata R package",
+  position = "bottomleft"
+) |>
+  addPolygons(
+    fillColor = ~pal(alcohol),
+    weight = 2,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.7,
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    label = labels,
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto")) |>
+  addLegend(pal = pal,   #create legend that does not include NA category
+            values = state_data$alcohol[!is.na(state_data$alcohol)], 
+            opacity = 0.7, 
+            title = "Gallons per Capita",
+            position = "bottomright")
+
+```
+
+The map did not illustrate the same trend as the motor vehicle fatality data. In fact, the Southeastern United States generally consumed slightly less alcohol per capita than Midwest and West Coast states, with exception to Utah which had the lowest amount of consumption. New Hampshire, Nevada, Wisconsin, and North Dakota had the greatest alcohol consumption in 2007.

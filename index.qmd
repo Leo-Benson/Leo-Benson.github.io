@@ -1,11 +1,43 @@
 ---
-title: "Leo-Benson.github.io"
+title: "Leo Benson"
+toc: false
+about: 
+  template: trestles
+  image: picture.jpg
+  image-shape: round
+  links:
+    - text: LinkedIn
+      href: www.linkedin.com/in/leo-benson-3a4aab421
+      target: _blank
+    - text: GitHub
+      href: https://github.com/Leo-Benson
+      target: _blank 
+    - text: Email
+      href: mailto:benson24@stolaf.edu
 ---
 
-This is a Quarto website.
+::: {#hero-heading}
+## Leo Benson
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Junior @ St. Olaf College studying Biology and Statistics & Data Science
 
-```{r}
-1 + 1
-```
+## Education
+
+**St. Olaf College | Northfield, MN**
+
+BA Biology & Statistics
+
+
+
+
+**St. Paul Academy and Summit School | St. Paul, MN**
+
+High School Diploma
+
+
+## Career Interests
+
+- Data Science
+- Data Analytics
+- Biostatistics
+:::
